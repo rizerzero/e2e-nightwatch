@@ -1,16 +1,11 @@
 #FROM java:8-jre
 FROM projectwave/jre-8-alpine
 
-
-
-# Set environment
-ENV JAVA_HOME /opt/jre
-ENV PATH ${PATH}:${JAVA_HOME}/bin
 ## Install dependencies: nodejs, chrome and xvfb
 #RUN apk add  -yqq openjdk-8-jre-headless
 
 RUN \
-  curl -sL https://deb.nodesource.com/setup_6.x | /bin/sh - && \
+  curl -sL https://deb.nodesource.com/setup_6.12.x | /bin/sh - && \
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
   echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
   apk update && \
