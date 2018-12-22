@@ -6,7 +6,7 @@ FROM projectwave/jre-8-alpine
 
 
 RUN \
-  curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+  curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
   echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
   apk update && \
