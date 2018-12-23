@@ -1,8 +1,7 @@
-#FROM java:8-jre
-FROM projectwave/jre-8-alpine
+
+FROM alpine:3.8
 
 ## Install dependencies: nodejs, chrome and xvfb
-#RUN apk add  -yqq openjdk-8-jre-headless
 
 ENV NODE_VERSION 6.12.0
 
@@ -54,6 +53,7 @@ RUN addgroup -g 1000 node \
   
 RUN \
   apk update && \
+  apk add -y openjdk8-jre-base \
   apk add -y nodejs google-chrome-stable xvfb && \
   npm install -g nightwatch && \
   rm -rf /var/lib/apt/lists/*
