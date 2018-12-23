@@ -1,10 +1,7 @@
 
 FROM alpine:3.8
-
 ## Install dependencies: nodejs, chrome and xvfb
-
 ENV NODE_VERSION 6.12.0
-
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
     && apk add --no-cache \
@@ -49,14 +46,15 @@ RUN addgroup -g 1000 node \
     && cd .. \
     && rm -Rf "node-v$NODE_VERSION" \
     && rm "node-v$NODE_VERSION.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
-  
-  
+
 RUN \
   apk update && \
-  apk add -y openjdk8-jre-base \
-  apk add -y nodejs google-chrome-stable xvfb && \
-  npm install -g nightwatch && \
-  rm -rf /var/lib/apt/lists/*
+  apk add --no-cache \ 
+  openjdk8-jre-base \
+  nodejs google-chrome-stable xvfb && \
+
+RUN npm install -g nightwatch && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tests
 
@@ -65,7 +63,6 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 ## Run nightwatch tests using xvfb
 CMD xvfb-run --server-args="-screen 0 1600x1200x24" nightwatch
-
 
 # ----------------
 # ----------------
